@@ -1,76 +1,3 @@
-select *
-From OwnerProperty
-where OwnerId = 1426
-
-select *
-From OwnerProperty
-where PropertyID = 13921
-
-select *
-From PropertyType
-
-select *
-From Property
-
-select *
-From PropertyHomeValue
-Where PropertyID = 5638
-
-select *
-From PropertyHomeValueType
-
-select *
-From PropertyExpense
-
-select *
-From PropertyFinance
-where PropertyId = 5638
-
-select *
-From RentalApplication
-
-select *
-From PropertyRentalPayment
-Where PropertyID = 5597
-
-select *
-From RentalPaymentTracking
-
-select *
-From PropertyRentalPayment
-
-select TP.TenantId,TP.PropertyId,TP.StartDate,TP.EndDate,TP.PaymentAmount,TPF.Name,DATEDIFF(Week, TP.StartDate, TP.EndDate) as diffDate,
-CASE
-        WHEN TPF.Name = 'Fortnightly'
-        THEN DATEDIFF(Week, TP.StartDate, TP.EndDate)*TP.PaymentAmount/2
-END as TotalPayment
-From TenantProperty TP
-Join TenantPaymentFrequencies TPF on TP.PaymentFrequencyId=TPF.Id
-where PropertyId = 5637
-
-select TP.TenantId,TP.PropertyId,TP.StartDate,TP.EndDate,TP.PaymentAmount,TP.PaymentFrequencyId,TPF.Name,DATEDIFF(wk, TP.StartDate, TP.EndDate) as DiffDate
-From TenantProperty TP
-Join TenantPaymentFrequencies TPF on TP.PaymentFrequencyId=TPF.Id
-where PropertyId = 5597
-
-select *
-From Tenant
-
-select *
-From Person
-
-select *
-From TenantMedia
-
-select *
-From TenantPaymentFrequencies
-
-select * 
-From TenantJobRequest
-where OwnerID = 1426
-
-select *
-From RequestStatus
 
 --Q1a)Display a list of all property names and their property id’s for Owner Id: 1426.
 
@@ -116,11 +43,6 @@ Join Property P on OP.PropertyId=P.Id
 Join TenantJobRequest TJR on P.ID = TJR.PropertyId
 Join RequestStatus RS on TJR.JobStatusId = RS.Id
 where OP.OwnerId = 1426
-
---- Something wrong with the database
-select * 
-From TenantJobRequest
-where OwnerID = 1426
 
 --Display all property names, current tenants first and last names and rental payments per week/ fortnight/month for the properties in question a).
 
